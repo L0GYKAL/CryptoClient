@@ -1,0 +1,14 @@
+wheel
+ccxt
+requests
+pycrypto
+pandas
+hashlib
+base64
+socket
+plotly
+pyqt5
+beautifulsoup
+python-dateutil
+tweepy
+vaderSentiment
