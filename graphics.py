@@ -8,7 +8,8 @@ import plotly.offline as py
 
 
 def chart(exchange: str, ticker: str, time, mypath: str):  # time: '1m','1d'
-    exec('exchange = ccxt.' + exchange + '()' )
+    exchange_class = getattr(ccxt,exchange)
+    exchange = exchange_class()
     df = pd.DataFrame(exchange.fetchOHLCV(ticker, time))
     df[0] = pd.to_datetime(df[0], unit='ms')
     layout = {'title': ticker,
