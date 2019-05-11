@@ -12,7 +12,8 @@ def openOrders(exchange: str):
         if df.loc[i]['exchange'] == exchange:
             apikey = df.loc[i,'apikey']
             secret = df.loc[i,'secret']
-    exec('exchange = ccxt.' + exchange + "({'apikey':" + apikey + "'secret':" + secret + "})" )
+    exchange_class = getattr(ccxt,exchange)
+    exchange = exchange_class({'apikey':apikey , 'secret': secret, 'enableRateLimit': True})
     if exchange.has['fetchOpenOrders']:
         exchange.options["warnOnFetchOpenOrdersWithoutSymbol"] = False
         openOders = []
@@ -29,10 +30,18 @@ def cancelOrder(exchange: str, orderId, symbol: str): #ex: cancelOrder(binance, 
         if df.loc[i]['exchange'] == exchange:
             apikey = df.loc[i,'apikey']
             secret = df.loc[i,'secret']
-    exec('exchange = ccxt.' + exchange + "({'apikey':" + apikey + "'secret':" + secret + "})" )
+    exchange_class = getattr(ccxt,exchange)
+    exchange = exchange_class({'apikey':apikey , 'secret': secret, 'enableRateLimit': True})
     try:
         exchange.cancelOrder(orderId, symbol)
         return str('Order canceled')
+        import sys
+        app = QtWidgets.QApplication(sys.argv)
+        Responsemessage = QtWidgets.QDialog()
+        ui = validationMessage.Ui_Responsemessage()
+        validationMessage.ui.setupUi(Responsemessage)
+        Responsemessage.show()
+        sys.exit(app.exec_())
     except: #if there is an error
         import sys
         app = QtWidgets.QApplication(sys.argv)
@@ -53,9 +62,17 @@ def createOrder(exchange: str, symbol: str, amount: float, price: float, side: s
         if df.loc[i]['exchange'] == exchange:
             apikey = df.loc[i,'apikey']
             secret = df.loc[i,'secret']
-    exec('exchange = ccxt.' + exchange + "({'apikey':" + apikey + "'secret':" + secret + "})" )
+    exchange_class = getattr(ccxt,exchange)
+    exchange = exchange_class({'apikey':apikey , 'secret': secret, 'enableRateLimit': True})
     try:
         order = exchange.create_order(symbol, type, side, amount, price)
+        import sys
+        app = QtWidgets.QApplication(sys.argv)
+        Responsemessage = QtWidgets.QDialog()
+        ui = validationMessage.Ui_Responsemessage()
+        validationMessage.ui.setupUi(Responsemessage)
+        Responsemessage.show()
+        sys.exit(app.exec_())
     except:
         import sys
         app = QtWidgets.QApplication(sys.argv)
