@@ -65,20 +65,29 @@ class Ui_balanceaccount(object):
         # remplissage de la liste d'exchanges
         exchanges = APIkeys_fetching.APIkeys()
         exchanges = exchanges.get()
-        i = 0
-        for exchange in exchanges:
-            name = exchange[0]
-            Id = exchange[1]
-            apikey = exchange[2]
-            secret = exchange[3]
-            balance = balances.fetchExchangeBalance(name, apikey, secret)
-            totalBalance += float(balance)
-            text = name + ': ' + Id + '\n' + str(balance) + ' BTC'
-            item = QtWidgets.QListWidgetItem()
-            self.listWidget.addItem(item)
-            item = self.listWidget.item(i)
-            item.setText(_translate("Dialog", text))
-            i += 1
+        if len(exchanges) >0:
+            i = 0
+            for exchange in exchanges:
+                name = exchange[0]
+                Id = exchange[1]
+                apikey = exchange[2]
+                secret = exchange[3]
+                balance = balances.fetchExchangeBalance(name, apikey, secret)
+                totalBalance += float(balance)
+                text = name + ': ' + Id + '\n' + str(balance) + ' BTC'
+                item = QtWidgets.QListWidgetItem()
+                self.listWidget.addItem(item)
+                item = self.listWidget.item(i)
+                item.setText(_translate("Dialog", text))
+                i += 1
+        else:
+            i=0
+            for exchange in ['upbit', 'kucoin', 'kraken', 'coss', 'bittrex', 'bitfinex', 'binance']:
+                item = QtWidgets.QListWidgetItem()
+                self.listWidget.addItem(item)
+                item = self.listWidget.item(i)
+                item.setText(_translate("Dialog", exchange))  
+                i+=1
         #exemple
         item = QtWidgets.QListWidgetItem()
         text = 'binance: firstExchange \n 2.26654 BTC'

@@ -7,7 +7,7 @@
 # WARNING! All changes made in this file will be lost!
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import APIkeys_fetching, fetchAddresses
+import APIkeys_fetching, fetchAddresses, balances
 from BasicFonctionalities import getAllCurrencies
 
 class Ui_AccountEditor(object):
@@ -91,7 +91,7 @@ class Ui_AccountEditor(object):
         self.comboBox_2.setGeometry(QtCore.QRect(30, 40, 131, 31))
         self.comboBox_2.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.comboBox_2.setObjectName("comboBox_2")
-        symbols = getAllCurrencies()
+        symbols = balances.getAllSymbols()
         for symbol in symbols:
             self.comboBox_2.addItem(symbol)
         self.comboBox_2.currentIndex()
