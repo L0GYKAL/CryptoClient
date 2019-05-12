@@ -1,7 +1,9 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 from accountEditor import Ui_AccountEditor
-import APIkeys_fetching, fetchAddresses, balances
+import APIkeys_fetching
+import fetchAddresses
+import balances
 
 
 class Ui_balanceaccount(object):
@@ -11,16 +13,12 @@ class Ui_balanceaccount(object):
         self.ui = Ui_AccountEditor()
         self.ui.setupUi(self.window)
         self.window.show()
-    
 
-
-    
-    
     def setupUi(self, Dialog):
         Dialog.setObjectName("Account")
         Dialog.resize(692, 535)
         Dialog.setStyleSheet("background-color: rgb(189, 255, 231);\n"
-"")
+                             "")
         _translate = QtCore.QCoreApplication.translate
         self.label = QtWidgets.QLabel(Dialog)
         self.label.setGeometry(QtCore.QRect(140, 60, 61, 16))
@@ -36,7 +34,8 @@ class Ui_balanceaccount(object):
         self.listWidget.addItem(item)
         self.listWidget_2 = QtWidgets.QListWidget(Dialog)
         self.listWidget_2.setGeometry(QtCore.QRect(410, 90, 211, 311))
-        self.listWidget_2.setStyleSheet("background-color: rgb(255, 255, 255);")
+        self.listWidget_2.setStyleSheet(
+            "background-color: rgb(255, 255, 255);")
         self.listWidget_2.setObjectName("listWidget_2")
         item = QtWidgets.QListWidgetItem()
         self.listWidget_2.addItem(item)
@@ -61,12 +60,12 @@ class Ui_balanceaccount(object):
         self.label_2.setText(_translate("Dialog", "Adresses"))
         __sortingEnabled = self.listWidget.isSortingEnabled()
         self.listWidget.setSortingEnabled(False)
-        #comptage de la balnce totale
+        # comptage de la balnce totale
         totalBalance = float()
-        #remplissage de la liste d'exchanges
+        # remplissage de la liste d'exchanges
         exchanges = APIkeys_fetching.APIkeys()
         exchanges = exchanges.get()
-        i = 0 
+        i = 0
         for exchange in exchanges:
             name = exchange[0]
             Id = exchange[1]
@@ -79,15 +78,21 @@ class Ui_balanceaccount(object):
             self.listWidget.addItem(item)
             item = self.listWidget.item(i)
             item.setText(_translate("Dialog", text))
-            i+=1
-            
+            i += 1
+        #exemple
+        item = QtWidgets.QListWidgetItem()
+        text = 'binance: firstExchange \n 2.26654 BTC'
+        self.listWidget.addItem(item)
+        item = self.listWidget.item(i)
+        item.setText(_translate("Dialog", text))
+        #
         self.listWidget.setSortingEnabled(__sortingEnabled)
         __sortingEnabled = self.listWidget_2.isSortingEnabled()
         self.listWidget_2.setSortingEnabled(False)
-        #remplissage de la liste de symbols
+        # remplissage de la liste de symbols
         addresses = fetchAddresses.addresses()
         addresses = addresses.addressesList()
-        
+
         i = 0
         for address in addresses:
             name = address[1]
@@ -99,14 +104,14 @@ class Ui_balanceaccount(object):
             self.listWidget_2.addItem(item)
             item = self.listWidget_2.item(i)
             item.setText(_translate("Dialog", text))
-            i +=1
-            
-        
+            i += 1
+
         self.listWidget_2.setSortingEnabled(__sortingEnabled)
-        self.lineEdit.setText(_translate("Dialog", "Total Balance: " + str(totalBalance) + ' BTC'))
-        self.pushButton.setText(_translate("Dialog", "Edit exchanges and addresses"))
-
-
+        totalBalance = 2.26654          #exemple
+        self.lineEdit.setText(_translate(
+            "Dialog", "Total Balance: " + str(totalBalance) + ' BTC'))
+        self.pushButton.setText(_translate(
+            "Dialog", "Edit exchanges and addresses"))
 
 
 if __name__ == "__main__":

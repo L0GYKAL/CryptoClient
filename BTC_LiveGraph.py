@@ -1,21 +1,8 @@
-from PyQt5 import QtCore, QtGui, QtWidgets
-import os
 import sys
+import os
 from PyQt5.Qt import QApplication, QMainWindow
 from PyQt5.QtCore import QThread, QRect, QUrl, QCoreApplication, QMetaObject, QTimer
 from PyQt5.QtWebEngineWidgets import QWebEngineView
-
-
-class updator(QtCore.QThread):
-    def __init__(self, window):
-        QtCore.QThread.__init__(self)
-
-
-
-    def run(self):
-        while True:
-            self.sleep(2000 * 2 / 1000)
-            self.window.htmlreader_BTCLiveGraph.reload()
 
 
 class Ui_BTC_LiveGraph(object):
@@ -45,16 +32,27 @@ class MainWindow(Ui_BTC_LiveGraph, QMainWindow):
 
         # You can do this here, just keep the Ui class for UI stuff
         self.mypath = os.path.dirname(__file__)
-        self.htmlreader_BTCLiveGraph.setUrl(QUrl(self.mypath + 'BTC_liveGraph.html'))
+        self.htmlreader_BTCLiveGraph.setUrl(
+            QUrl(self.mypath + '/BTC_liveGraph.html'))
 
         self._updator = QTimer(self)
         self._updator.setSingleShot(False)
         self._updator.timeout.connect(self.reload)
         # Reload every 4 seconds
-        self._updator.start(4000)
+        self._updator.start(6000)
 
     def reload(self):
         self.htmlreader_BTCLiveGraph.reload()
+
+
+class updator(QThread):
+    def __init__(self, window):
+        QThread.__init__(self)
+
+    def run(self):
+        while True:
+            self.sleep(2000 * 2 / 1000)
+            self.window.htmlreader_BTCLiveGraph.reload()
 
 
 if __name__ == "__main__":

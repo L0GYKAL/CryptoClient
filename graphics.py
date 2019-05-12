@@ -74,5 +74,5 @@ def plotsentimentAnalysis(symbol):  # return a url to a graph
 
 if __name__ == '__main__':
     """binance = ccxt.binance()"""
-    chart('binance', 'RVN/BTC', '1d', 'F:/')
+    #chart('binance', 'RVN/BTC', '1d', 'F:/')
     BTC_liveGraph()
