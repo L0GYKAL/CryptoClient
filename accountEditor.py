@@ -94,7 +94,7 @@ class Ui_AccountEditor(object):
         symbols = getAllCurrencies()
         for symbol in symbols:
             self.comboBox_2.addItem(symbol)
-        self.comboBox_2.currentIndex(0)
+        self.comboBox_2.currentIndex()
         self.addressline = QtWidgets.QLineEdit(self.groupBox_4)
         self.addressline.setGeometry(QtCore.QRect(30, 110, 113, 20))
         self.addressline.setStyleSheet("background-color: rgb(255, 255, 255);")

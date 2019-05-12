@@ -1,3 +1,5 @@
+import os
+import pandas as pd
 class addresses():
     def __init__(self):
         self.addressesInfo = pd.DataFrame(columns=['id', 'address', 'symbol'])
@@ -12,14 +14,17 @@ class addresses():
             self.addressesInfo.to_csv('addresseInfo.csv')
 
     def add(self, Id, address, symbol):
-        self.addressesInfo.append([Id, address, symbol])
+        i = len(self.addressesInfo.index)
+        self.addressesInfo.at[i,'id']= Id
+        self.addressesInfo.at[i,'address']= address
+        self.addressesInfo.at[i,'symbol'] = symbol
         self.addressesInfo.to_csv('addresseInfo.csv')
         
     def addressesList(self):
+        print(self.addressesInfo)
         liste = []
-        for i, row in self.addressesInfo.iterrows():
-            liste2=[]
-            for info in row:
-                liste2.append([info])
-            liste.append(liste2)
+        for i in self.addressesInfo.index.values:
+            liste.append(self.addressesInfo.iloc[i,:].tolist())
         return liste
+    
+

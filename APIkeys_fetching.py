@@ -6,11 +6,12 @@ class APIkeys():
         self.fileName = 'exchangeCSV.csv'
         self.exchangesInfo = pd.DataFrame(
                 index = ['upbit', 'kucoin', 'kraken', 'coss', 'bittrex', 'bitfinex', 'binance'],
-                
-                data={'exchange':['upbit', 'kucoin', 'kraken', 'coss', 'bittrex', 'bitfinex', 'binance'], 'id': [], 'apikey': [], 'secret': []}
+                columns = ['exchange', 'id', 'apikey', 'secret']
                 )
+        
+        self.exchangesInfo.at[:, 'exchange'] = ['upbit', 'kucoin', 'kraken', 'coss', 'bittrex', 'bitfinex', 'binance']
         if self.firstTime():
-            self.write(self.exchangesInfo)
+            self.write()
         self.exchangesInfo = self.read()
 
 
@@ -25,14 +26,20 @@ class APIkeys():
             exchangeCSV = pd.read_csv(f)    #voir si je fais un chiffrement
             return exchangeCSV
 
-    def write(self, exchangesInfo): #écriture dans le fichier
-        pd.DataFrame.to_csv(self.fileName)
+    def write(self): #écriture dans le fichier
+        self.exchangesInfo.to_csv(self.fileName)
         
     def get(self):
-        return self.exchangeInfo
+        liste = []
+        for i in self.exchangesInfo.index.values:
+            if (type(self.exchangesInfo.at[i,'apikey']) == str and type(self.exchangesInfo.at[i,'secret']) == str):
+                liste.append(self.exchangesInfo.iloc[i,:].tolist())
+        return liste
 
     #management des clés API
 
-    def editKeys(self, exchange: str, Id: str, apiKey: str, secret: str):
-        self.exchangesInfo.loc[exchange] = [exchange] + [Id] + [apikey] + [secret]
-        write(self.exchangesInfo)
+    def editKeys(self, exchange: str, Id: str, apikey: str, secret: str):
+        self.exchangesInfo.at[exchange,'id'] = Id
+        self.exchangesInfo.at[exchange,'apikey'] = apikey
+        self.exchangesInfo.at[exchange,'secret'] = secret
+        self.write()

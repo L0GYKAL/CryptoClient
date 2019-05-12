@@ -1,16 +1,8 @@
-# -*- coding: utf-8 -*-
-
-# Form implementation generated from reading ui file 'F:\Graphs.ui'
-#
-# Created by: PyQt5 UI code generator 5.9.2
-#
-# WARNING! All changes made in this file will be lost!
-
+from PyQt5.QtWebEngineWidgets import QWebEngineView
 from PyQt5 import QtCore, QtGui, QtWidgets
 import os
 import sys
 import BuysellWindow
-sys.path.append("..")  # Adds higher directory to python modules path.
 import graphics
 
 class Ui_Dialog(object):
@@ -47,7 +39,7 @@ class Ui_Dialog(object):
         self.BUY_SELL.setStyleSheet("background-color: rgb(255, 255, 255);")
         self.BUY_SELL.setObjectName("BUY_SELL")
         self.BUY_SELL.clicked.connect(self.openBuySell)
-        self.Htmlreader_graph = QtWebEngineWidgets.QWebEngineView(Dialog)
+        self.Htmlreader_graph = QWebEngineView(Dialog)
         self.Htmlreader_graph.setGeometry(QtCore.QRect(20, 20, 1541, 961))
         self.Htmlreader_graph.setCursor(QtGui.QCursor(QtCore.Qt.CrossCursor))
         self.Htmlreader_graph.setWhatsThis("")
@@ -111,14 +103,14 @@ class Ui_Dialog(object):
         self.Timeframe.setText(_translate("Dialog", "Timeframe:"))
         
 
-from PyQt5 import QtWebEngineWidgets
+
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     Dialog = QtWidgets.QDialog()
     ui = Ui_Dialog()
-    ui.setupUi(Dialog)
+    ui.setupUi(Dialog, 'binance', 'RVN/BTC')
     Dialog.show()
     sys.exit(app.exec_())
 

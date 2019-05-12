@@ -24,6 +24,21 @@ class Ui_Watchlist(object):
         self.liste.setStyleSheet("background-color: rgb(255, 255, 255);\n"
 "")
         self.liste.setObjectName("liste")
+        #remplissage de la liste
+        _translate = QtCore.QCoreApplication.translate
+        self.exchanges = tickerFinder('/')
+        tickersList = []
+        for exchange in self.exchanges.keys():
+            for ticker in self.exchanges[exchange]:
+                text = exchange + ' : ' + ticker
+                tickersList.append(text)
+        i=0
+        for text in tickersList:
+            item = QtWidgets.QListWidgetItem()
+            self.liste.addItem(item)
+            item = self.liste.item(i)
+            item.setText(_translate("Dialog", text))
+            i+=1
         self.liste.setCurrentRow(0)
         self.searchBar = QtWidgets.QLineEdit(Dialog)
         self.searchBar.setGeometry(QtCore.QRect(20, 39, 161, 31))
@@ -88,6 +103,7 @@ class Ui_Watchlist(object):
         
         #création de la fonction de recherche
     def searching(self):
+        self.liste.clear()
         _translate = QtCore.QCoreApplication.translate
         self.exchanges = tickerFinder(self.searchBar.text().upper())
         tickersList = []
@@ -106,16 +122,7 @@ class Ui_Watchlist(object):
     def graph(self):
         i = self.liste.currentRow()
         t = 0
-        ticker1 = ''
-        exchange1 = ''
-        for exchange in self.exchanges.keys():
-            for ticker in self.exchanges[exchange]: 
-                if t==i:
-                    ticker1 = ticker
-                    exchange1 = exchange
-                    break
-                else:
-                    t+=1
+        exchange, ticker1 = i.split()
 
         #open the Graphs window
         self.window = QtWidgets.QMainWindow()
