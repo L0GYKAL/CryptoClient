@@ -1,7 +1,7 @@
 import sys
 from PyQt5.QtWidgets import QWidget, QProgressBar, QPushButton, QApplication
 from PyQt5.QtCore import QBasicTimer
-from interfacefinal import Ui_Dialog
+from interfacefinalGUI import Ui_Dialog
 
 
 class ProgressBarDemo(QWidget):
