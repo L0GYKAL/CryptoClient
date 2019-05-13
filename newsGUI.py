@@ -11,7 +11,7 @@ from newsAPI import getNews
 
 class Ui_News(object):
     def setupUi(self, Dialog):
-        Dialog.setObjectName("Dialog")
+        Dialog.setObjectName("News")
         Dialog.resize(1300, 776)
         self.NewsText = QtWidgets.QLabel(Dialog)
         self.NewsText.setGeometry(QtCore.QRect(280, 10, 47, 16))

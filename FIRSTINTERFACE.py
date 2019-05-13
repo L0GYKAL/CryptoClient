@@ -1,11 +1,8 @@
 from tkinter import *
-import os
+import os, sys
 import ProgressBarGUI
+from PyQt5.QtWidgets import QWidget, QProgressBar, QPushButton, QApplication
 
-
-
-def delete2():
-    screen3.destroy()
 
 def delete3():
     screen4.destroy()
@@ -13,14 +10,15 @@ def delete3():
 def delete4():
     screen5.destroy()
 
-def logout():
-    screen7.destroy()
 
    
     
 def login_sucess():
     screen2.destroy()
-    os.system('ProgressBarGUI.py')
+    app = QApplication(sys.argv)
+    demo = ProgressBarGUI.ProgressBarDemo()
+    demo.show()
+    sys.exit(app.exec_())
 
 def password_not_recognised():
     global screen4
@@ -63,13 +61,12 @@ def login_verify():
     username_entry1.delete(0, END)
     password_entry1.delete(0, END)
     
-    list_of_files = os.listdir()
-    if username1 in list_of_files:
-      file1 = open(username1, "r")
-      verify = file1.read().splitlines()
-      if password1 in verify:
-        login_sucess()
-      else:
+    if os.path.isfile(username1):
+        with open(username1, 'r') as f:
+            verify = f.read().splitlines()
+        if password1 in verify:
+            login_sucess()
+        else:
           password_not_recognised()
     else:
         user_not_found()

@@ -1,4 +1,4 @@
 @echo off
 python graphics.py
-interfacefinalGUI.py
+python interfacefinalGUI.py
 exit
