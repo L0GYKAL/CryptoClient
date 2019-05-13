@@ -40,7 +40,7 @@ class Ui_Dialog(object):
         self.window.show()
         
     def setupUi(self, Dialog):
-        Dialog.setObjectName("Dialog")
+        Dialog.setObjectName("MainWindow")
         Dialog.resize(703, 395)
         Dialog.setStyleSheet("image: url(:/newPrefix/Interface 2.jpg);")
         self.pushButton = QtWidgets.QPushButton(Dialog)

@@ -16,7 +16,7 @@ class Ui_Dialog(object):
         self.exchange = exchange
         self.ticker = ticker
         self.tickerList = ticker.split('/')
-        Dialog.setObjectName("Dialog")
+        Dialog.setObjectName("Buy/Sell Window")
         Dialog.resize(301, 521)
         Dialog.setStyleSheet("background-color: rgb(189, 255, 231);\n"
 "")

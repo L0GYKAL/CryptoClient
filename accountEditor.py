@@ -12,7 +12,7 @@ from BasicFonctionalities import getAllCurrencies
 
 class Ui_AccountEditor(object):
     def setupUi(self, Account):
-        Account.setObjectName("Account")
+        Account.setObjectName("Account Edition Window")
         Account.resize(572, 508)
         self.textBrowser = QtWidgets.QTextBrowser(Account)
         self.textBrowser.setGeometry(QtCore.QRect(0, 0, 581, 51))
