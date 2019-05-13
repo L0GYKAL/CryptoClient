@@ -29,19 +29,16 @@ def is_connected():  # retrun True if connected, False else
 
 def tickerFinder(symbol: str):
     markets = dict()
-    certified = ['upbit', 'kucoin', 'kraken',
+    certified = ['upbit', 'kraken',
                  'coss', 'bittrex', 'bitfinex', 'binance']
-    ccxtList = []
-    for exchange in certified:
-        exec("ccxtList.append(ccxt." + str(exchange) + "())")
     for exchange in certified:  # ticker in certified[exchange]...
-        i = 0
+        exchange_class = getattr(ccxt, exchange)
+        ex =  exchange_class({'enableRateLimit': True})
         # trouver tous les tickers
-        markets[exchange] = ccxtList[i].loadMarkets()
-        i += 1
-    for exchange in certified:
+        markets[exchange] = ex.loadMarkets()
+    for exchange in markets.keys():
         tickers = []
-        for ticker in markets[exchange].keys():
+        for ticker in markets[exchange]:
             if str(ticker).find(symbol) != -1:
                 tickers.append(str(ticker))
         markets[exchange] = tickers
@@ -114,4 +111,4 @@ def sentimentAnalysis(symbol: str)-> list:  # ex: symbol = BTC
 
 if __name__ == '__main__':
     if is_connected():
-        print(tickerFinder('OMG'))
+        print(tickerFinder('RVN'))

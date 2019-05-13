@@ -122,7 +122,7 @@ class Ui_Watchlist(object):
     def graph(self):
         i = self.liste.currentItem()
         t = 0
-        exchange, null, ticker1 = i.text().split()
+        exchange1, null, ticker1 = i.text().split()
 
         #open the Graphs window
         self.window = QtWidgets.QMainWindow()

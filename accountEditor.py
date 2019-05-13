@@ -150,7 +150,6 @@ class Ui_AccountEditor(object):
         self.Exchangeliste.setItemText(5, _translate("Account", "bittrex"))
         self.Exchangeliste.setItemText(6, _translate("Account", "bitfinex"))
         self.groupBox_4.setTitle(_translate("Account", "Adresse"))
-        self.comboBox_2.setItemText(0, _translate("Account", "BTC"))
         self.addressline.setText(_translate("Account", "Adresse"))
         self.addAddressepush.setText(_translate("Account", "Ajouter"))
 

@@ -47,7 +47,7 @@ class Ui_Dialog(object):
         self.Htmlreader_graph.setWhatsThis("")
         self.Htmlreader_graph.setAutoFillBackground(False)
         #récupération du chemin
-        self.Htmlreader_graph.setUrl(QtCore.QUrl("file:///"+ self.mypath + "/plotlyGraph.html"))
+        self.Htmlreader_graph.setUrl(QtCore.QUrl("file:/plotlyGraph.html"))
         self.Htmlreader_graph.setObjectName("Htmlreader_graph")
         self.Timeframe = QtWidgets.QLabel(Dialog)
         self.Timeframe.setGeometry(QtCore.QRect(1150, 20, 111, 31))
